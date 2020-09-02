@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Any
+from typing import Any, List, Union
 
 
 @dataclass
@@ -24,8 +24,8 @@ class cyWeatherAPIResponseDailyMaxMinAvgItemStruct:
 
 @dataclass
 class cyWeatherAPIResponseDailyWindItemPropertyStruct:
-    speed: float
-    direction: float
+    speed: Union[float, int]
+    direction: Union[float, int]
 
 
 @dataclass

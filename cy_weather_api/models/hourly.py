@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from typing import Any, List
+from typing import Union
 
 
 @dataclass
 class cyWeatherAPIResponseHourlyWindStruct:
     datetime: str
-    speed: float
-    direction: float
+    speed: Union[float, int]
+    direction: Union[float, int]
 
 
 @dataclass
