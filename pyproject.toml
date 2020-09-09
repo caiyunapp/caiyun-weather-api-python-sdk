@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cy-weather-api"
-version = "0.1.3"
+version = "0.1.4"
 description = "Caiyun Weather API Python SDK"
 authors = ["Caiyunapp <admin@caiyunapp.com>"]
 readme = "README.md"
@@ -16,6 +16,7 @@ dacite = "^1.5.0"
 pre-commit = "^2.3.0"
 black = "^19.10b0"
 flake8 = "isort"
+pytest = "^6.0.1"
 
 [build-system]
 requires = ["poetry>=0.12"]
