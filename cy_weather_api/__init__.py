@@ -1,4 +1,4 @@
-from cyapi.client import CyAPIClient
-from cyapi.models import initFromDict
+from cy_weather_api.client import cy_weather_apiClient
+from cy_weather_api.models import initFromDict
 
-__all__ = ["CyAPIClient", "initFromDict"]
+__all__ = ["cy_weather_apiClient", "initFromDict"]

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 import requests
-from cyapi.models import initFromDict, CyWeatherAPIResponseHandler
+from cy_weather_api.models import initFromDict, CyWeatherAPIResponseHandler
 
 API_BASE = (
     "http://api.caiyunapp.com/v2.5/{token}/{lng},{lat}/weather.json?"

@@ -19,7 +19,7 @@ from typing import Dict, List
 import orjson
 from dacite import from_dict
 
-from cyapi.models.result import cyWeatherAPIResponseResultStruct
+from cy_weather_api.models.result import cyWeatherAPIResponseResultStruct
 
 
 class EnhancedJSONEncoder(json.JSONEncoder):
