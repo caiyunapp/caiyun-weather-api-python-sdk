@@ -16,4 +16,4 @@ install:
 script:
   - export PYTHONPATH=`pwd`; pytest tests/
   - black --check --verbose .
-  - flake8 dashboard
+  - flake8 cy_weather_api

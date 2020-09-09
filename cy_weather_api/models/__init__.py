@@ -69,7 +69,6 @@ def initFromDict(data: Dict) -> CyWeatherAPIResponseHandler:
 
 if __name__ == "__main__":
     import requests
-    # from dacite import from_dict
 
     # NOTE: Test token, no one can ensure its availability.
     TOKEN = "TAkhjf8d1nlSlspN"
