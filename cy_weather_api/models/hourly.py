@@ -47,6 +47,7 @@ class cyWeatherAPIResponseHourlyStruct:
     temperature: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     humidity: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     cloudrate: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
+    skycon: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     pressure: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     visibility: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     dswrf: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
