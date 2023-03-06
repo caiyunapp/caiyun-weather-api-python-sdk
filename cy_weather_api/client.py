@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import requests
 
 from cy_weather_api.models import CyWeatherAPIResponseHandler, initFromDict
+from typing import Optional
 
 API_BASE = (
     "http://api.caiyunapp.com/v2.5/{token}/{lng},{lat}/weather.json?"
@@ -25,9 +26,9 @@ class CyWeatherAPIClient:
         lng: float,
         lat: float,
         lang: str = "en_US",
-        begin: int = None,
+        begin: Optional[int] = None,
         alert: bool = False,
-        granu: str = None,
+        granu: Optional[str] = None,
         unit: str = "metric",
         dailysteps: int = 5,
         hourlysteps: int = 48,
