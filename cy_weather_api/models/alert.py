@@ -1,6 +1,10 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
+@dataclass
+class cyWeatherAPIResponseAlertAdcodeItemStruct:
+    adcode: str
+    name: str
 
 @dataclass
 class cyWeatherAPIResponseAlertContentItemStruct:
@@ -27,5 +31,6 @@ class cyWeatherAPIResponseAlertContentItemStruct:
 
 @dataclass
 class cyWeatherAPIResponseAlertStruct:
-    status: str = None
-    content: List[cyWeatherAPIResponseAlertContentItemStruct] = None
+    status: Optional[str] = None
+    content: Optional[List[cyWeatherAPIResponseAlertContentItemStruct]] = None
+    adcodes: Optional[List[cyWeatherAPIResponseAlertAdcodeItemStruct]] = None

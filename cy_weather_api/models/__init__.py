@@ -14,7 +14,7 @@ We encourage use Golang's coding style:
 
 import json
 from dataclasses import asdict, dataclass, is_dataclass
-from typing import Dict, List
+from typing import Dict, List, Union
 
 import orjson
 from dacite import from_dict
@@ -45,7 +45,7 @@ class CyWeatherAPIResponseHandler:
     def __post_init__(self):
         pass
 
-    def dumps(self, ensure_text=True) -> bytes:
+    def dumps(self, ensure_text=True) -> Union[bytes, str]:
         """Fast dumps via orjson.
 
         Check orjson docs for details: https://github.com/ijl/orjson#dataclass

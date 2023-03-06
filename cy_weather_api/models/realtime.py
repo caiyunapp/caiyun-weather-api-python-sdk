@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Union
+from typing import Optional, Union
 
 
 @dataclass
@@ -25,7 +25,7 @@ class cyWeatherAPIResponseRealtimePrecipitationItemNearestStruct:
 @dataclass
 class cyWeatherAPIResponseRealtimePrecipitationStruct:
     local: cyWeatherAPIResponseRealtimePrecipitationItemLocalStruct
-    nearest: cyWeatherAPIResponseRealtimePrecipitationItemNearestStruct = None
+    nearest: Optional[cyWeatherAPIResponseRealtimePrecipitationItemNearestStruct] = None
 
 
 @dataclass
@@ -44,12 +44,12 @@ class cyWeatherAPIResponseRealtimeAirQualityAQIDescStruct:
 class cyWeatherAPIResponseRealtimeAirQualityStruct:
     aqi: cyWeatherAPIResponseRealtimeAirQualityAQIValueStruct
     description: cyWeatherAPIResponseRealtimeAirQualityAQIDescStruct
-    pm25: float = None
-    pm10: float = None
-    o3: float = None
-    so2: float = None
-    no2: float = None
-    co: float = None
+    pm25: Optional[float] = None
+    pm10: Optional[float] = None
+    o3: Optional[float] = None
+    so2: Optional[float] = None
+    no2: Optional[float] = None
+    co: Optional[float] = None
 
 
 @dataclass

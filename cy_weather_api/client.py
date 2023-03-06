@@ -6,7 +6,7 @@ from cy_weather_api.models import CyWeatherAPIResponseHandler, initFromDict
 from typing import Optional
 
 API_BASE = (
-    "http://api.caiyunapp.com/v2.5/{token}/{lng},{lat}/weather.json?"
+    "http://api.caiyunapp.com/v2.6/{token}/{lng},{lat}/weather.json?"
     "&lang={lang}"
     "&unit={unit}"
     "&dailysteps={dailysteps}"
