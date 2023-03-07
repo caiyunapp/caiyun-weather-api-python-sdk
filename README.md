@@ -34,7 +34,7 @@ clear weather, overcast after 20 o'clock this afternoon, followed by cloudy
 
 ### Use our dataclass models
 
-The default HTTP client is requests, you can other HTTP cient to request API,
+The default HTTP client is requests, you can use other HTTP cient to request API,
 and pass the response dict to our models (based on `dataclasss`):
 
 ```py
@@ -42,7 +42,7 @@ from cy_weather_api import initFromDict
 
 data = {
     "status": "ok",
-    "api_version": "v2.5",
+    "api_version": "v2.6",
     "api_status": "active",
     "lang": "en_US",
     "unit": "metric",

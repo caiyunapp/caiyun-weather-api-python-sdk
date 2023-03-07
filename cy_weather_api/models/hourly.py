@@ -3,6 +3,12 @@ from typing import Any, List, Union
 
 
 @dataclass
+class cyWeatherAPIResponseHourlyPrecipitationItemStruct:
+    datetime: str
+    value: float
+    probability: float
+
+@dataclass
 class cyWeatherAPIResponseHourlyWindStruct:
     datetime: str
     speed: Union[float, int]
@@ -43,8 +49,9 @@ class cyWeatherAPIResponseHourlySimpleDatetimeValuePair:
 class cyWeatherAPIResponseHourlyStruct:
     status: str
     description: str
-    precipitation: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
+    precipitation: List[cyWeatherAPIResponseHourlyPrecipitationItemStruct]
     temperature: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
+    apparent_temperature: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     humidity: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     cloudrate: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     skycon: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]

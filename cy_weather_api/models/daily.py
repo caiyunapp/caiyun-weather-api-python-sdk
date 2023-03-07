@@ -21,6 +21,13 @@ class cyWeatherAPIResponseDailyMaxMinAvgItemStruct:
     min: float
     avg: float
 
+@dataclass
+class cyWeatherAPIResponseDailyPrecipitationItemStruct:
+    date: str
+    max: float
+    min: float
+    avg: float
+    probability: float
 
 @dataclass
 class cyWeatherAPIResponseDailyWindItemPropertyStruct:
@@ -82,14 +89,20 @@ class cyWeatherAPIResponseDailyLifeIndexItemStruct:
 class cyWeatherAPIResponseDailyStruct:
     status: str
     astro: List[cyWeatherAPIResponseDailyAstroItemStruct]
-    precipitation: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
+    precipitation: List[cyWeatherAPIResponseDailyPrecipitationItemStruct]
+    precipitation_08h_20h: List[cyWeatherAPIResponseDailyPrecipitationItemStruct]
+    precipitation_20h_32h: List[cyWeatherAPIResponseDailyPrecipitationItemStruct]
     temperature: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
+    temperature_08h_20h: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
+    temperature_20h_32h: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
     humidity: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
     cloudrate: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
     pressure: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
     visibility: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
     dswrf: List[cyWeatherAPIResponseDailyMaxMinAvgItemStruct]
     wind: List[cyWeatherAPIResponseDailyWindItemStruct]
+    wind_08h_20h: List[cyWeatherAPIResponseDailyWindItemStruct]
+    wind_20h_32h: List[cyWeatherAPIResponseDailyWindItemStruct]
     skycon: List[cyWeatherAPIResponseDailySkyconItemStruct]
     skycon_08h_20h: List[cyWeatherAPIResponseDailySkyconItemStruct]
     skycon_20h_32h: List[cyWeatherAPIResponseDailySkyconItemStruct]
