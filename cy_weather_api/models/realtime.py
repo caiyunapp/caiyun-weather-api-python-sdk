@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional, Union
 
+from cy_weather_api.models.skycon import CySkyCon
+
 
 @dataclass
 class cyWeatherAPIResponseRealtimeWindStruct:
@@ -70,7 +72,7 @@ class cyWeatherAPIResponseRealtimeStruct:
     temperature: float
     humidity: float
     cloudrate: float
-    skycon: str
+    skycon: CySkyCon
     visibility: float
     dswrf: float
     wind: cyWeatherAPIResponseRealtimeWindStruct

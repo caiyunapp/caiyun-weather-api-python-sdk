@@ -9,9 +9,10 @@ from dataclasses import asdict, dataclass, is_dataclass
 from typing import Dict, List, Union
 
 import orjson
-from dacite import from_dict
+from dacite import Config, from_dict
 
 from cy_weather_api.models.result import cyWeatherAPIResponseResultStruct
+from cy_weather_api.models.skycon import CySkyCon
 
 
 class EnhancedJSONEncoder(json.JSONEncoder):
@@ -53,7 +54,7 @@ class CyWeatherResponse:
 
     @classmethod
     def from_dict(cls, data: Dict) -> "CyWeatherResponse":
-        return from_dict(data_class=cls, data=data)
+        return from_dict(data_class=cls, data=data, config=Config(cast=[CySkyCon]))
 
 
 if __name__ == "__main__":

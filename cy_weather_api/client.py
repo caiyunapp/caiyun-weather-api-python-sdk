@@ -22,7 +22,7 @@ class CyWeatherAPIClient:
     token: str = "TAkhjf8d1nlSlspN"
     http_client = httpx.Client()
 
-    def fetch(
+    def _make_url(
         self,
         lng: float,
         lat: float,
@@ -33,7 +33,7 @@ class CyWeatherAPIClient:
         unit: VALID_UNIT_OPTIONS = "metric",
         dailysteps: int = 5,
         hourlysteps: int = 48,
-    ) -> CyWeatherResponse:
+    ) -> str:
         if unit and unit not in VALID_UNIT_OPTIONS.__args__:
             raise ValueError(
                 f"Invalid unit, got {unit}, expect one from {VALID_UNIT_OPTIONS.__args__}"
@@ -70,6 +70,31 @@ class CyWeatherAPIClient:
             int(begin)
             url += f"&begin={begin}"
 
+        return url
+
+    def fetch(
+        self,
+        lng: float,
+        lat: float,
+        lang: Literal["zh_CN", "zh_TW", "ja", "en_GB", "en_US"] = "en_US",
+        begin: Optional[int] = None,
+        alert: bool = False,
+        granu: VALID_GRANU_OPTIONS = None,
+        unit: VALID_UNIT_OPTIONS = "metric",
+        dailysteps: int = 5,
+        hourlysteps: int = 48,
+    ) -> CyWeatherResponse:
+        url = self._make_url(
+            lng,
+            lat,
+            lang=lang,
+            begin=begin,
+            alert=alert,
+            granu=granu,
+            unit=unit,
+            dailysteps=dailysteps,
+            hourlysteps=hourlysteps,
+        )
         resp = self.http_client.get(url)
         resp_status = resp.status_code
 

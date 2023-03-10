@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Any, List, Union
 
+from cy_weather_api.models.skycon import CySkyCon
+
 
 @dataclass
 class cyWeatherAPIResponseHourlyPrecipitationItemStruct:
@@ -47,6 +49,12 @@ class cyWeatherAPIResponseHourlySimpleDatetimeValuePair:
 
 
 @dataclass
+class cyWeatherAPIResponseHourlySkyconDatetimeValuePair:
+    datetime: str
+    value: CySkyCon
+
+
+@dataclass
 class cyWeatherAPIResponseHourlyStruct:
     status: str
     description: str
@@ -55,7 +63,7 @@ class cyWeatherAPIResponseHourlyStruct:
     apparent_temperature: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     humidity: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     cloudrate: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
-    skycon: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
+    skycon: List[cyWeatherAPIResponseHourlySkyconDatetimeValuePair]
     pressure: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     visibility: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
     dswrf: List[cyWeatherAPIResponseHourlySimpleDatetimeValuePair]
