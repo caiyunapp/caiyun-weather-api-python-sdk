@@ -2,7 +2,7 @@
 
 ## Install
 
-Python 3.6+ is required.
+Python 3.8.1+ is required.
 
 ```sh
 pip install cy-weather-api
@@ -12,16 +12,21 @@ pip install cy-weather-api
 
 ### Request Caiyun API
 
-```py
+**NOTE: `TAkhjf8d1nlSlspN` is test token, no one can ensure its availability.**
+
+```python
 from cy_weather_api import CyWeatherAPIClient
 
 client = CyWeatherAPIClient(token="TAkhjf8d1nlSlspN")
-apiResult = client.fetch(lng=101.8551, lat=26.6832, lang="zh_CN", alert=True)
-print(apiResult.result.hourly.description)
-apiResult = client.fetch(lng=-0.2008, lat=51.5024, lang="en_GB")
-print(apiResult.result.hourly.description)
-apiResult = client.fetch(lng=73.9808, lat=40.7648, lang="en_US")
-print(apiResult.result.hourly.description)
+
+api_result = client.fetch(lng=101.8551, lat=26.6832, lang="zh_CN", alert=True)
+print(api_result.result.hourly.description)
+
+api_result = client.fetch(lng=-0.2008, lat=51.5024, lang="en_GB")
+print(api_result.result.hourly.description)
+
+api_result = client.fetch(lng=73.9808, lat=40.7648, lang="en_US")
+print(api_result.result.hourly.description)
 ```
 
 Output sample:
@@ -34,11 +39,11 @@ clear weather, overcast after 20 o'clock this afternoon, followed by cloudy
 
 ### Use our dataclass models
 
-The default HTTP client is requests, you can use other HTTP cient to request API,
-and pass the response dict to our models (based on `dataclasss`):
+The default HTTP client is httpx, you can use other HTTP client to request API,
+and pass the response dict to our models (based on `dataclass`):
 
 ```py
-from cy_weather_api import initFromDict
+from cy_weather_api import CyWeatherResponse
 
 data = {
     "status": "ok",
@@ -52,5 +57,5 @@ data = {
     "location": [39.888888, 116.674501],
     "result": {"forecast_keypoint": "test forecast_keypoint", "primary": 0},
 }
-apiResult = initFromDict(data)
+result = CyWeatherResponse.from_dict(data)
 ```

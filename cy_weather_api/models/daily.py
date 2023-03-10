@@ -21,6 +21,7 @@ class cyWeatherAPIResponseDailyMaxMinAvgItemStruct:
     min: float
     avg: float
 
+
 @dataclass
 class cyWeatherAPIResponseDailyPrecipitationItemStruct:
     date: str
@@ -28,6 +29,7 @@ class cyWeatherAPIResponseDailyPrecipitationItemStruct:
     min: float
     avg: float
     probability: float
+
 
 @dataclass
 class cyWeatherAPIResponseDailyWindItemPropertyStruct:

@@ -1,58 +1,56 @@
 from dataclasses import dataclass
+from typing import Optional, Literal
 
-import requests
+import httpx
 
-from cy_weather_api.models import CyWeatherAPIResponseHandler, initFromDict
-from typing import Optional
+from cy_weather_api.models import CyWeatherResponse
 
 API_BASE = (
-    "http://api.caiyunapp.com/v2.6/{token}/{lng},{lat}/weather.json?"
+    "https://api.caiyunapp.com/v2.6/{token}/{lng},{lat}/weather.json?"
     "&lang={lang}"
     "&unit={unit}"
     "&dailysteps={dailysteps}"
     "&hourlysteps={hourlysteps}"
+    "&alert={alert}"
 )
-VALID_UNIT_OPTIONS = ["metric", "metric:v1", "metric:v2", "imperial", "SI"]
-VALID_GRANU_OPTIONS = ["realtime", "minutely", "hourly", "daily", "weather"]
+VALID_UNIT_OPTIONS = Literal["metric", "metric:v1", "metric:v2", "imperial", "SI"]
+VALID_GRANU_OPTIONS = Literal["realtime", "minutely", "hourly", "daily", "weather"]
 
 
 @dataclass
 class CyWeatherAPIClient:
     token: str = "TAkhjf8d1nlSlspN"
-    session = requests.Session()
+    http_client = httpx.Client()
 
     def fetch(
         self,
         lng: float,
         lat: float,
-        lang: str = "en_US",
+        lang: Literal["zh_CN", "zh_TW", "ja", "en_GB", "en_US"] = "en_US",
         begin: Optional[int] = None,
         alert: bool = False,
-        granu: Optional[str] = None,
-        unit: str = "metric",
+        granu: VALID_GRANU_OPTIONS = None,
+        unit: VALID_UNIT_OPTIONS = "metric",
         dailysteps: int = 5,
         hourlysteps: int = 48,
-    ) -> CyWeatherAPIResponseHandler:
-
-        if unit and unit not in VALID_UNIT_OPTIONS:
+    ) -> CyWeatherResponse:
+        if unit and unit not in VALID_UNIT_OPTIONS.__args__:
             raise ValueError(
-                "Invaliad unit, got  {}, expect one from {}".format(
-                    unit, VALID_UNIT_OPTIONS
-                )
+                f"Invalid unit, got {unit}, expect one from {VALID_UNIT_OPTIONS.__args__}"
             )
 
-        if granu and granu not in VALID_GRANU_OPTIONS:
+        if granu and granu not in VALID_GRANU_OPTIONS.__args__:
             raise ValueError(
-                "Invaliad granu, got  {}, expect one from {}".format(
-                    unit, VALID_GRANU_OPTIONS
-                )
+                f"Invalid granu, got {granu}, expect one from {VALID_GRANU_OPTIONS.__args__}"
             )
 
         if dailysteps < 1 or dailysteps > 15:
-            raise ValueError("dailysteps in range [1, 15]")
+            raise ValueError(f"Invalid dailysteps={dailysteps} should in range [1, 15]")
 
         if hourlysteps < 1 or hourlysteps > 360:
-            raise ValueError("hourlysteps in range [1, 360]")
+            raise ValueError(
+                "Invalid hourlysteps={hourlysteps} should in range [1, 360]"
+            )
 
         url = API_BASE.format(
             token=self.token,
@@ -62,35 +60,39 @@ class CyWeatherAPIClient:
             unit=unit,
             hourlysteps=hourlysteps,
             dailysteps=dailysteps,
+            alert=alert,
         )
 
         if granu:
-            url += "&granu={}".format(granu)
+            url += f"&granu={granu}"
 
-        if begin is not None:
-            try:
-                int(begin)
-                url += "&begin={}".format(begin)
-            except Exception:
-                raise ValueError("Invalid begin")
+        if begin:
+            int(begin)
+            url += f"&begin={begin}"
 
-        _data = self.session.get(url).json()
-        if _data["status"] != "ok":
-            _mess = (
-                "Calling Caiyun API Errored with {error_mess}, please check token status\n"
-                "url: {url}\n"
-                "data: {api_data}\n"
+        resp = self.http_client.get(url)
+        resp_status = resp.status_code
+
+        if resp_status == 200:
+            return CyWeatherResponse.from_dict(resp.json())
+
+        raise ValueError(
+            (
+                f"Calling API failed(HTTP {resp_status})`, please check token status\n\n"
+                f"- url: {url}\n"
+                f"- raw: {resp.text}\n"
             )
-            mess = _mess.format(url=url, api_data=_data, error_mess=_data.get("error"))
-            raise ValueError(mess)
-        return initFromDict(_data)
+        )
 
 
 if __name__ == "__main__":
     client = CyWeatherAPIClient(token="TAkhjf8d1nlSlspN")
-    apiResult = client.fetch(lng=101.8551, lat=26.6832, lang="zh_CN", alert=True)
-    print(apiResult.result.hourly.description)
-    apiResult = client.fetch(lng=-0.2008, lat=51.5024, lang="en_GB")
-    print(apiResult.result.hourly.description)
-    apiResult = client.fetch(lng=73.9808, lat=40.7648, lang="en_US")
-    print(apiResult.result.hourly.description)
+
+    api_result = client.fetch(lng=101.8551, lat=26.6832, lang="zh_CN", alert=True)
+    print(api_result.result.hourly.description)
+
+    api_result = client.fetch(lng=-0.2008, lat=51.5024, lang="en_GB")
+    print(api_result.result.hourly.description)
+
+    api_result = client.fetch(lng=73.9808, lat=40.7648, lang="en_US")
+    print(api_result.result.hourly.description)

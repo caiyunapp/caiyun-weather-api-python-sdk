@@ -8,6 +8,7 @@ class cyWeatherAPIResponseHourlyPrecipitationItemStruct:
     value: float
     probability: float
 
+
 @dataclass
 class cyWeatherAPIResponseHourlyWindStruct:
     datetime: str

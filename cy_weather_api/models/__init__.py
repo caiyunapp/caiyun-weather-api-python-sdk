@@ -1,15 +1,7 @@
-"""Dataclass for Caiyun Weather API.
+"""Dataclasses for Caiyun Weather API.
 
-Below dataclasses arr based on Caiyun Weather API v2.5, the offical API docs:
-
-    zh_CN: https://open.caiyunapp.com/通用预报接口/v2.5
-    en_US: https://open.caiyunapp.com/General_weather_interface/v2.5
-
-We encourage use Golang's coding style:
-
-    1. Use black as format tool.
-    2. Use Camel-Case.
-    3. Avoid complex oop tricks.
+Below dataclasses arr based on Caiyun Weather API v2.6, the offical API docs:
+https://docs.caiyunapp.com/docs/intro
 """
 
 import json
@@ -30,7 +22,7 @@ class EnhancedJSONEncoder(json.JSONEncoder):
 
 
 @dataclass
-class CyWeatherAPIResponseHandler:
+class CyWeatherResponse:
     status: str
     api_version: str
     api_status: str
@@ -42,18 +34,15 @@ class CyWeatherAPIResponseHandler:
     location: List[float]
     result: cyWeatherAPIResponseResultStruct
 
-    def __post_init__(self):
-        pass
-
     def dumps(self, ensure_text=True) -> Union[bytes, str]:
         """Fast dumps via orjson.
 
         Check orjson docs for details: https://github.com/ijl/orjson#dataclass
         """
+        v = orjson.dumps(self)
         if ensure_text:
-            return orjson.dumps(self).decode("utf-8")
-        else:
-            return orjson.dumps(self)
+            v = v.decode("utf-8")
+        return v
 
     def dumps_pretty(self, **kwargs) -> str:
         """Dumps JSON with indent.
@@ -62,22 +51,18 @@ class CyWeatherAPIResponseHandler:
         """
         return json.dumps(self, cls=EnhancedJSONEncoder, **kwargs)
 
-
-def initFromDict(data: Dict) -> CyWeatherAPIResponseHandler:
-    return from_dict(data_class=CyWeatherAPIResponseHandler, data=data)
+    @classmethod
+    def from_dict(cls, data: Dict) -> "CyWeatherResponse":
+        return from_dict(data_class=cls, data=data)
 
 
 if __name__ == "__main__":
-    import requests
+    import httpx
 
     # NOTE: Test token, no one can ensure its availability.
-    TOKEN = "TAkhjf8d1nlSlspN"
-    LNG, LAT = 116.3883, 39.9289
-    URL = "http://api.caiyunapp.com/v2.5/{TOKEN}/{LNG},{LAT}/weather".format(
-        TOKEN=TOKEN, LNG=LNG, LAT=LAT
-    )
+    token = "TAkhjf8d1nlSlspN"
+    lng, lat = 116.3883, 39.9289
+    url = f"https://api.caiyunapp.com/v2.6/{token}/{lng},{lat}/weather?alert=true"
 
-    apiResponseDataclass = from_dict(
-        data_class=CyWeatherAPIResponseHandler, data=requests.get(URL).json()
-    )
-    print(apiResponseDataclass.dumps())
+    resp = CyWeatherResponse.from_dict(httpx.get(url).json())
+    print(resp.dumps_pretty(indent=4, ensure_ascii=False))

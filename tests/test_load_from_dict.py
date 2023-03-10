@@ -2,14 +2,14 @@ import unittest
 import json
 from unittest import TestCase
 
-from cy_weather_api import initFromDict
+from cy_weather_api import CyWeatherResponse
 
 
 class TestSDK(TestCase):
     def test_init_from_dict(self):
         with open("tests/data/sample1.json") as f:
             data = json.loads(f.read())
-        item = initFromDict(data)
+        item = CyWeatherResponse.from_dict(data)
         self.assertEqual(item.status, "ok")
 
 
