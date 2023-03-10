@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 from typing import Literal, Optional
 
@@ -102,11 +103,13 @@ class CyWeatherAPIClient:
             return CyWeatherResponse.from_dict(resp.json())
 
         http_name = httpx.codes(status_code).name
+        headers = json.dumps(dict(resp.headers), indent=4)
         raise ValueError(
             (
                 f"Calling API failed: HTTP {status_code} {http_name}\n\n"
                 f"- url: {url}\n"
                 f"- raw: {resp.text}\n"
+                f"- header: {headers}\n"
             )
         )
 
