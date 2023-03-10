@@ -1,5 +1,5 @@
-import unittest
 import json
+import unittest
 from unittest import TestCase
 
 from cy_weather_api import CyWeatherResponse
