@@ -5,6 +5,7 @@ description = "Caiyun Weather API Python SDK"
 authors = ["Caiyunapp <admin@caiyunapp.com>"]
 readme = "README.md"
 repository = "https://github.com/caiyunapp/caiyun-weather-api-python-sdk"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"

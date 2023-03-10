@@ -96,14 +96,15 @@ class CyWeatherAPIClient:
             hourlysteps=hourlysteps,
         )
         resp = self.http_client.get(url)
-        resp_status = resp.status_code
+        status_code = resp.status_code
 
-        if resp_status == 200:
+        if status_code == httpx.codes.OK:
             return CyWeatherResponse.from_dict(resp.json())
 
+        http_name = httpx.codes(status_code).name
         raise ValueError(
             (
-                f"Calling API failed(HTTP {resp_status})`, please check token status\n\n"
+                f"Calling API failed: HTTP {status_code} {http_name}\n\n"
                 f"- url: {url}\n"
                 f"- raw: {resp.text}\n"
             )
@@ -111,7 +112,7 @@ class CyWeatherAPIClient:
 
 
 if __name__ == "__main__":
-    client = CyWeatherAPIClient(token="TAkhjf8d1nlSlspN")
+    client = CyWeatherAPIClient(token="TAkhjf8d1nlSlspN1")
 
     api_result = client.fetch(lng=101.8551, lat=26.6832, lang="zh_CN", alert=True)
     print(api_result.result.hourly.description)
