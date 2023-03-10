@@ -190,6 +190,9 @@ files = [
     {file = "coverage-7.2.1.tar.gz", hash = "sha256:c77f2a9093ccf329dd523a9b2b3c854c20d2a3d968b6def3b820272ca6732242"},
 ]
 
+[package.dependencies]
+tomli = {version = "*", optional = true, markers = "python_full_version <= \"3.11.0a6\" and extra == \"toml\""}
+
 [package.extras]
 toml = ["tomli"]
 
@@ -579,4 +582,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1"
-content-hash = "196368976e99e2a851522fdee7a43192586d269304953524b73fe812653a5ec3"
+content-hash = "f43474e8a1ccc81d4a20eb32ec36d06fa218af93deb1fb8dafa9c82e5e9c5166"
