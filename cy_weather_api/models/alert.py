@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+
 @dataclass
 class cyWeatherAPIResponseAlertAdcodeItemStruct:
-    adcode: str
+    adcode: int
     name: str
+
 
 @dataclass
 class cyWeatherAPIResponseAlertContentItemStruct:
@@ -23,10 +25,6 @@ class cyWeatherAPIResponseAlertContentItemStruct:
     source: str
     title: str
     location: str
-
-    def __post__init(self):
-        self.lng = self.latlon[-1]
-        self.lat = self.latlon[0]
 
 
 @dataclass
