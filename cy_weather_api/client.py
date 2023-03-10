@@ -112,7 +112,7 @@ class CyWeatherAPIClient:
 
 
 if __name__ == "__main__":
-    client = CyWeatherAPIClient(token="TAkhjf8d1nlSlspN1")
+    client = CyWeatherAPIClient(token="TAkhjf8d1nlSlspN")
 
     api_result = client.fetch(lng=101.8551, lat=26.6832, lang="zh_CN", alert=True)
     print(api_result.result.hourly.description)
