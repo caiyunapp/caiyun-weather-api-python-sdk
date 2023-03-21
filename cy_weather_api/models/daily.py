@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Any, List, Union
 
+from cy_weather_api.models.skycon import CySkyCon
+
 
 @dataclass
 class cyWeatherAPIResponseDailyAstroItemTimeStruct:
@@ -68,7 +70,7 @@ class cyWeatherAPIResponseDailyAirQualityItemStruct:
 @dataclass
 class cyWeatherAPIResponseDailySkyconItemStruct:
     date: str
-    value: str
+    value: CySkyCon
 
 
 @dataclass
