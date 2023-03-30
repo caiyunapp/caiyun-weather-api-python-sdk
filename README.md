@@ -1,5 +1,12 @@
 # Caiyun Weather API Python SDK
 
+> **NOTE**: This project is not officially supported by ColorfulClouds
+> Technology.
+>
+> It's open sourced under MIT License and designed as a debug tool for our
+> internal systems instead of online services, or third party technology
+> support.
+
 ## Install
 
 Python 3.8.1+ is required.
