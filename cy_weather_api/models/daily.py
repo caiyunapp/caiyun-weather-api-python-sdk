@@ -111,3 +111,4 @@ class cyWeatherAPIResponseDailyStruct:
     skycon_08h_20h: List[cyWeatherAPIResponseDailySkyconItemStruct]
     skycon_20h_32h: List[cyWeatherAPIResponseDailySkyconItemStruct]
     life_index: cyWeatherAPIResponseDailyLifeIndexItemStruct
+    air_quality: cyWeatherAPIResponseDailyAirQualityItemStruct
