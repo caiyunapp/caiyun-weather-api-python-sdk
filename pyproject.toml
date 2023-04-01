@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cy-weather-api"
-version = "0.2.0"
+version = "0.2.1"
 description = "Caiyun Weather API Python SDK"
 authors = ["Caiyunapp <admin@caiyunapp.com>"]
 readme = "README.md"
