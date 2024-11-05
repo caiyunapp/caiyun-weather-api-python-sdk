@@ -9,7 +9,7 @@
 
 ## Install
 
-Python 3.8.1+ is required.
+Python 3.12+ is required.
 
 ```sh
 pip install cy-weather-api
