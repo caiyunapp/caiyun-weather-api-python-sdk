@@ -2,7 +2,7 @@
 name = "cy_weather_api"
 version = "0.2.2"
 description = "Caiyun Weather API Python SDK"
-authors = [
+maintainers = [
     { name = "caiyunapp", email = "oss@caiyunapp.com" },
 ]
 readme = "README.md"
